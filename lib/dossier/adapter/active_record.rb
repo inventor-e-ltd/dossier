@@ -18,7 +18,7 @@ module Dossier
         Result.new(connection.exec_query(*["\n#{query}", report_name].compact))
       rescue => e
         #restart the connection on a failure with database drop
-        if e.message.include? "PG::ConnectionBad: connection is closed:"
+        if e.message.include? "connection is closed"
           Dossier.configure
         end
         raise Dossier::ExecuteError.new "#{e.message}\n\n#{query}"
