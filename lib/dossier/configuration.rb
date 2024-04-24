@@ -18,7 +18,11 @@ module Dossier
     end
 
     def yaml_config
-      YAML.load(ERB.new(File.read(config_path)).result, aliases: true)[Rails.env].symbolize_keys
+      if YAML.respond_to?(:unsafe_load)
+        YAML.load(ERB.new(File.read(config_path)).result, aliases: true)[Rails.env].symbolize_keys
+      else
+        YAML.load(ERB.new(File.read(config_path)).result)[Rails.env].symbolize_keys
+      end
     rescue Errno::ENOENT
       {}
     end
