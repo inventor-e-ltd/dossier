@@ -25,7 +25,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 DB_CONFIG = [:mysql2, :sqlite3, :postgresql].reduce({}) do |config, adapter_name|
   config.tap do |hash|
     path = "spec/fixtures/db/#{adapter_name}.yml"
-    hash[adapter_name] = YAML.load_file(path).symbolize_keys if File.exist?(path)
+    hash[adapter_name] = YAML.load_file(path, aliases: true).symbolize_keys if File.exist?(path)
   end
 end.freeze
 
