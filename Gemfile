@@ -13,7 +13,8 @@ gem "activerecord",  RAILS_VERSION
 gem "jquery-rails"
 gem "mysql2"
 gem "pg"
-gem 'coveralls', require: false
+gem "coveralls", require: false
+gem "csv"
 
 # test unit removed from stdlib in ruby 2.2.0
 gem 'test-unit' if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.2.0')
